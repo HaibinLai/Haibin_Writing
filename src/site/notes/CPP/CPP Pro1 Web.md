@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/CPP/CPP Pro1 Web/","tags":["gardenEntry"]}
+{"dg-publish":true,"permalink":"/CPP/CPP Pro1 Web/"}
 ---
 
 
