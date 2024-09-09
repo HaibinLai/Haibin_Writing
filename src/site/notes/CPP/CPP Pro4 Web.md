@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/CPP/CPP Pro4 Web/","created":"2024-09-09T09:55:06.367+08:00","updated":"2024-09-09T13:49:49.271+08:00"}
+{"dg-publish":true,"permalink":"/CPP/CPP Pro4 Web/","created":"2024-09-09T09:55:06.367+08:00","updated":"2024-09-09T13:50:16.723+08:00"}
 ---
 
 
@@ -7,7 +7,7 @@
 # Project4 Report:  A 2D GPU Mat
 
 ------------
-PDF 版本：[Project 3](https://www.haibinlaiblog.top/wp-content/uploads/2024/09/Project3赖海斌.pdf)
+PDF 版本：[Project 4](https://www.haibinlaiblog.top/wp-content/uploads/2024/09/Project4赖海斌.pdf)
 Github: [https://github.com/HaibinLai/CS205-CPP-Programing-Project](https://github.com/HaibinLai/CS205-CPP-Programing-Project)
 ## 摘要
 
