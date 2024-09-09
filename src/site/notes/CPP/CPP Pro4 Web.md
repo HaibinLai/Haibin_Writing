@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/CPP/CPP Pro4 Web/","created":"2024-09-09T09:55:06.367+08:00","updated":"2024-09-09T13:48:09.545+08:00"}
+{"dg-publish":true,"permalink":"/CPP/CPP Pro4 Web/","created":"2024-09-09T09:55:06.367+08:00","updated":"2024-09-09T13:49:49.271+08:00"}
 ---
 
 
@@ -402,3 +402,191 @@ GPU矩阵乘法计算在1000前后都是0.05秒，在升高到8000后来到了0.
 为了防止我在Project上传时cu文件无法上传，我先将代码丢在了这里。当然，也可以去
 
 [Laihb1106205841/GpuMat.github.io: A matrix class for GPU on SUSTech 2024Spring C/C++ Project4](https://github.com/Laihb1106205841/GpuMat.github.io) 我会上传对应的代码。
+
+```C++
+#include <iostream>
+
+#include <vector>
+
+_class_ Matrix {
+
+_private:_
+
+    _size_t_ rows;
+
+    _size_t_ cols;
+
+    _size_t_* ref_count; // 引用计数器
+
+_public:_
+
+std::vector<std::vector<_float_>> *data; // 指向矩阵数据的指针
+
+    // 构造函数
+
+    Matrix(_size_t_ _rows_, _size_t_ _cols_) : rows(rows), cols(cols) {
+
+        data = new std::vector<std::vector<_float_>>(_rows_, std::vector<_float_>(_cols_, 0.0f));
+
+        ref_count = new _size_t_(1); // 初始引用计数为1
+
+        std::cout << "HI from cons\n";
+
+    }
+
+    // 拷贝构造函数
+
+    Matrix(const Matrix& _other_) : rows(_other_.rows), cols(_other_.cols), data(other.data), ref_count(_other_.ref_count) {
+
+        (*ref_count)++;
+
+        std::cout << "HI from copy\n";
+
+    }
+
+    // 析构函数
+
+    ~Matrix() {
+
+        (*ref_count)--;
+
+        if (*ref_count == 0) {
+
+            delete data; // 释放数据
+
+            delete ref_count; // 释放引用计数器
+
+            std::cout << "Delete!\n";
+
+        }
+
+        std::cout << "De\n";
+
+    }
+
+    // 赋值运算符重载
+
+    Matrix& operator=(const Matrix& _other_) {
+
+        if (this != &_other_) {
+
+            (*ref_count)--;
+
+            if (*ref_count == 0) {
+
+                delete data;
+
+                delete ref_count;
+
+            }
+
+            rows = _other_.rows;
+
+            cols = _other_.cols;
+
+            data = _other_.data;
+
+            ref_count = _other_.ref_count;
+
+            (*ref_count)++;
+
+        }
+
+        return *this;
+
+    }
+
+    // 重载 * 运算符以实现矩阵乘法
+
+    Matrix operator*(const Matrix& _other_) {
+
+        if (cols != _other_.rows) {
+
+            std::cerr << "Error: Matrix dimensions are incompatible for multiplication." << std::endl;
+
+            return Matrix(0, 0); // 返回一个空矩阵表示错误
+
+        }
+
+        Matrix result(rows, _other_.cols);
+
+        for (_size_t_ i = 0; i < rows; ++i) {
+
+            for (_size_t_ j = 0; j < _other_.cols; ++j) {
+
+                for (_size_t_ k = 0; k < cols; ++k) {
+
+                    result.data->at(i).at(j) += data->at(i).at(k) * _other_.data->at(k).at(j);
+
+                }
+
+            }
+
+        }
+
+        return result;
+
+    }
+
+    // 打印矩阵
+
+    _void_ print() {
+
+        for (_size_t_ i = 0; i < rows; ++i) {
+
+            for (_size_t_ j = 0; j < cols; ++j) {
+
+                std::cout << data->at(i).at(j) << " ";
+
+            }
+
+            std::cout << std::endl;
+
+        }
+
+    }
+
+};
+
+_int_ main() {
+
+    Matrix A(2, 3);
+
+    (*A.data) = {{1, 2, 3},
+
+                 {4, 5, 6}};
+
+    Matrix B(3, 2);
+
+    (*B.data) = {{7, 8},
+
+                 {9, 10},
+
+                 {11, 12}};
+
+    std::cout << "Matrix A:" << std::endl;
+
+    A.print();
+
+    std::cout << "\nMatrix B:" << std::endl;
+
+    B.print();
+
+    Matrix C = A * B; // 执行矩阵乘法
+
+    Matrix D = A;
+
+    std::cout << "\nMatrix C (Result of A * B):" << std::endl;
+
+    C.print();
+
+    return 0;
+
+}
+```
+
+
+还有两篇文章：
+ [内存分配不再神秘：深入剖析malloc函数实现原理与机制 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/643112072)
+
+ [CUDA编程入门之处理Device显存的三个CUDA API_cuda有哪些api-CSDN博客](https://blog.csdn.net/MR_kdcon/article/details/115324328)
