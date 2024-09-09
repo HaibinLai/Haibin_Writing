@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/CPP/CPP Pro3 Web/","created":"2024-09-06T23:58:50.140+08:00","updated":"2024-09-09T01:35:53.663+08:00"}
+{"dg-publish":true,"permalink":"/CPP/CPP Pro3 Web/","created":"2024-09-06T23:58:50.140+08:00","updated":"2024-09-09T13:48:24.510+08:00"}
 ---
 
 
@@ -605,7 +605,7 @@ Jack还是最早定义了MPI标准的一群人，他对于整个高性能计算�
 
 
 
-**Reference**
+## **Reference**
 
 [1] Dongarra, J.J., Luszczek, P., & Petitet, A. (2003). The LINPACK Benchmark: past, present and future. Concurrency and Computation: Practice and Experience, 15. Available: [https://netlib.org/utk/people/JackDongarra/PAPERS/hplpaper.pdf](https://netlib.org/utk/people/JackDongarra/PAPERS/hplpaper.pdf)
 
